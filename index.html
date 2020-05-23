@@ -1,9 +1,24 @@
 <html>
 <head>    
-    <title>Nyan Kat</title> 
+    <title>Nyan Kat</title>
+    <meta charset="utf-8" />
+    <link href="style.css" rel="stylesheet" />
 </head> 
 <body>    
-    <div id="app"></div> 
+    <header>
+        <div id="score"></div>
+        <div id="lives">
+            <img src="images/player.png" alt="Hamburguer Live">
+            <img src="images/player.png" alt="Hamburguer Live">
+            <img src="images/player.png" alt="Hamburguer Live">
+        </div>
+    </header>
+    <div id="app">
+        <div class="box-message">
+            <p id="message"></p>
+            <button id="restart">Start</button>
+        </div>
+    </div>
     <script src="js/data.js"></script> 
     <script src="js/Enemy.js"></script> 
     <script src="js/engine-utilities.js"></script> 

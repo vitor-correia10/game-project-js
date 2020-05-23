@@ -1,0 +1,32 @@
+body{
+    margin-top: 0;
+}
+
+header{
+    background: wheat;
+    width: 375px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+    align-items: center;
+}
+
+header img{
+    width: 30px;
+}
+
+.box-message{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 150px;
+    left: 150px;
+    background: wheat;
+    visibility: hidden;
+    border-radius: 10px;
+    flex-direction: column;
+}

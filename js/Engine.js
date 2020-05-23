@@ -14,6 +14,10 @@ class Engine {
     // Initially, we have no enemies in the game. The enemies property refers to an array
     // that contains instances of the Enemy class
     this.enemies = [];
+
+    this.points = 0;
+    this.score = document.querySelector('#score');
+    
     // We add the background image to the game
     addBackground(this.root);
   }
@@ -52,12 +56,18 @@ class Engine {
       // We add this enemy to the enemies array
       const spot = nextEnemySpot(this.enemies);
       this.enemies.push(new Enemy(this.root, spot));
+      this.points += 10;
+          this.score.innerText = `Score: ${this.points}`;
     }
 
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
     if (this.isPlayerDead()) {
-      window.alert('Game over');
+          this.message = document.querySelector('#message');
+          this.message.innerText = score.innerText;
+          
+          this.boxMessage = document.querySelector('.box-message');
+          this.boxMessage.style.visibility = 'visible';
       return;
     }
 
