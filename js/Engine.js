@@ -17,6 +17,12 @@ class Engine {
 
     this.points = 0;
     this.score = document.querySelector('#score');
+
+    this.sound = document.createElement('audio');
+    this.sound.src = './sound/bensound-brazilsamba.mp3';
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
     
     // We add the background image to the game
     addBackground(this.root);
@@ -58,6 +64,7 @@ class Engine {
       this.enemies.push(new Enemy(this.root, spot));
       this.points += 10;
           this.score.innerText = `Score: ${this.points}`;
+          this.sound.play();
     }
 
     // We check if the player is dead. If he is, we alert the user
@@ -68,6 +75,10 @@ class Engine {
           
           this.boxMessage = document.querySelector('.box-message');
           this.boxMessage.style.visibility = 'visible';
+
+          this.restart = document.querySelector('#restart');
+          this.restart.addEventListener('click', location.reload.bind(location));
+          this.sound.pause();
       return;
     }
 
@@ -79,8 +90,13 @@ class Engine {
   // the burger never dies. In your exercises you will fix this method.
   isPlayerDead = () => {
     let isDead = false
+    // let live = document.getElementsByTagName("img");
+    // let parent = live.parentNode;
+
     this.enemies.forEach((enemy) => {
-      if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y){
+      if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y && this.live > 0){
+        this.parent.removeChild(this.live);
+      } else if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y) {
         isDead = true;
       }
     });

@@ -29,4 +29,18 @@ header img{
     visibility: hidden;
     border-radius: 10px;
     flex-direction: column;
+    z-index: 10;
+}
+
+h3{
+    margin: 0;
+}
+
+#restart{
+    border-radius: 5px;
+    outline: none;
+}
+
+#restart:hover{
+    background: lightgray;
 }
