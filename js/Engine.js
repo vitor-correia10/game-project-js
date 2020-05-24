@@ -90,8 +90,8 @@ class Engine {
   // the burger never dies. In your exercises you will fix this method.
   isPlayerDead = () => {
     let isDead = false
-    // let live = document.getElementsByTagName("img");
-    // let parent = live.parentNode;
+    let live = document.getElementsByTagName("img");
+    let parent = live.parentNode;
 
     this.enemies.forEach((enemy) => {
       if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y && this.live > 0){
