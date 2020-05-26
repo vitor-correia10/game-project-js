@@ -45,18 +45,20 @@ class Enemy {
 
     // Show that the user can actually see the img DOM node, we append it to the root DOM node.
     theRoot.appendChild(this.domElement);
-    this.speed = Math.random() / 2 + 0.15;
+    // this.speed = speed;
   }
 
   // We set the speed property of the enemy. This determines how fast it moves down the screen.
   // To make sure that every enemy has a different speed, we use Math.random()
   // this method will be called on the enemy instance every few milliseconds. The parameter
   // timeDiff refers to the number of milliseconds since the last update was called.
-  update(timeDiff) {
+  update(timeDiff, mutliplier) {
     // We update the y property of the instance in proportion of the amount of time
     // since the last call to update. We also update the top css property so that the image
     // is updated on screen
-    this.y = this.y + timeDiff * this.speed;
+
+    this.y += timeDiff * Math.random() * mutliplier + 0.4  
+
     this.domElement.style.top = `${this.y}px`;
 
     // If the y position of the DOM element is greater than the GAME_HEIGHT then the enemy is at the bottom

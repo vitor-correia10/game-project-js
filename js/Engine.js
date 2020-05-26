@@ -23,6 +23,8 @@ class Engine {
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
+
+    this.waiting = false;
     
     // We add the background image to the game
     addBackground(this.root);
@@ -46,7 +48,7 @@ class Engine {
     // We use the number of milliseconds since the last call to gameLoop to update the enemy positions.
     // Furthermore, if any enemy is below the bottom of our game, its destroyed property will be set. (See Enemy.js)
     this.enemies.forEach((enemy) => {
-      enemy.update(timeDiff);
+      enemy.update(timeDiff, this.points / 500);
     });
 
     // We remove all the destroyed enemies from the array referred to by \`this.enemies\`.
@@ -89,13 +91,18 @@ class Engine {
   // This method is not implemented correctly, which is why
   // the burger never dies. In your exercises you will fix this method.
   isPlayerDead = () => {
-    let isDead = false
-    let live = document.getElementsByTagName("img");
-    let parent = live.parentNode;
+    let isDead = false;
+    if (this.waiting) {
+      return false
+    };
+    let live = document.querySelector(".live");
+    let parent = live && live.parentNode;
 
     this.enemies.forEach((enemy) => {
-      if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y && this.live > 0){
-        this.parent.removeChild(this.live);
+      if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y && live){
+        parent.removeChild(live);
+        this.waiting = true;
+        setTimeout(() => this.waiting = false, 500);
       } else if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y) {
         isDead = true;
       }
