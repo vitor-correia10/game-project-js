@@ -5,7 +5,7 @@ class Enemy {
   // The constructor takes 2 arguments.
   // - theRoot refers to the parent DOM element.
   //   We need a way to add the DOM element we create in this constructor to our DOM.
-  // - enemySpot is the position of the enemy (either 0, 1, 2, 3 or 4)
+  // - enemySpot is the position of the enemy (either 0, 1, 2, 3, 4, 5 or 6)
   // Since the constructor takes 2 parameters
   // and the 2 parameters provide important information, we must supply 2 arguments to "new" every time we
   // create an instance of this class.
@@ -57,7 +57,7 @@ class Enemy {
     // since the last call to update. We also update the top css property so that the image
     // is updated on screen
 
-    this.y += timeDiff * Math.random() * mutliplier + 0.4  
+    this.y += timeDiff * Math.random() * mutliplier + 0.25
 
     this.domElement.style.top = `${this.y}px`;
 

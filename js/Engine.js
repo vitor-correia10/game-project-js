@@ -48,7 +48,7 @@ class Engine {
     // We use the number of milliseconds since the last call to gameLoop to update the enemy positions.
     // Furthermore, if any enemy is below the bottom of our game, its destroyed property will be set. (See Enemy.js)
     this.enemies.forEach((enemy) => {
-      enemy.update(timeDiff, this.points / 500);
+      enemy.update(timeDiff, this.points / 1000);
     });
 
     // We remove all the destroyed enemies from the array referred to by \`this.enemies\`.
@@ -59,15 +59,38 @@ class Engine {
     });
 
     // We need to perform the addition of enemies until we have enough enemies.
-    while (this.enemies.length < MAX_ENEMIES) {
+    if (this.points < 100){
+    while (this.enemies.length < (MAX_ENEMIES - 2)) {
       // We find the next available spot and, using this spot, we create an enemy.
       // We add this enemy to the enemies array
       const spot = nextEnemySpot(this.enemies);
       this.enemies.push(new Enemy(this.root, spot));
       this.points += 10;
-          this.score.innerText = `Score: ${this.points}`;
-          this.sound.play();
+      this.score.innerText = `Score: ${this.points}`;
+      this.sound.play();
+      }
+    } else if (this.points >= 100 && this.points < 500){ 
+      while (this.enemies.length < (MAX_ENEMIES - 1)) {
+        // We find the next available spot and, using this spot, we create an enemy.
+        // We add this enemy to the enemies array
+        const spot = nextEnemySpot(this.enemies);
+        this.enemies.push(new Enemy(this.root, spot));
+        this.points += 10;
+        this.score.innerText = `Score: ${this.points}`;
+        this.sound.play();
+        }
+    } else {
+      while (this.enemies.length < (MAX_ENEMIES)) {
+        // We find the next available spot and, using this spot, we create an enemy.
+        // We add this enemy to the enemies array
+        const spot = nextEnemySpot(this.enemies);
+        this.enemies.push(new Enemy(this.root, spot));
+        this.points += 10;
+        this.score.innerText = `Score: ${this.points}`;
+        this.sound.play();
+        }
     }
+
 
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
@@ -101,8 +124,12 @@ class Engine {
     this.enemies.forEach((enemy) => {
       if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y && live){
         parent.removeChild(live);
+
+        enemy.destroyed = true;
+        enemy.root.removeChild(enemy.domElement);
+
         this.waiting = true;
-        setTimeout(() => this.waiting = false, 500);
+        setTimeout(() => this.waiting = false, 600);
       } else if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y) {
         isDead = true;
       }
