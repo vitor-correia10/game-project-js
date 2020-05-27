@@ -49,7 +49,7 @@ class Player {
     this.domElement.style.top = `${this.y}px`;
   }
   moveDown() {
-    if (this.y < 500) {
+    if (this.y < 436) {
       this.y = this.y + PLAYER_HEIGHT;
     }
     this.domElement.style.top = `${this.y}px`;
