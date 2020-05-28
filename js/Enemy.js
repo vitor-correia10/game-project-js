@@ -56,7 +56,7 @@ class Enemy {
     // since the last call to update. We also update the top css property so that the image
     // is updated on screen
 
-    this.y += timeDiff * Math.random() * mutliplier + 0.35
+    this.y += timeDiff * Math.random() * mutliplier + 0.45
 
     this.domElement.style.top = `${this.y}px`;
 
