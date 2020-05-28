@@ -45,7 +45,6 @@ class Enemy {
 
     // Show that the user can actually see the img DOM node, we append it to the root DOM node.
     theRoot.appendChild(this.domElement);
-    // this.speed = speed;
   }
 
   // We set the speed property of the enemy. This determines how fast it moves down the screen.
@@ -57,7 +56,7 @@ class Enemy {
     // since the last call to update. We also update the top css property so that the image
     // is updated on screen
 
-    this.y += timeDiff * Math.random() * mutliplier + 0.25
+    this.y += timeDiff * Math.random() * mutliplier + 0.35
 
     this.domElement.style.top = `${this.y}px`;
 

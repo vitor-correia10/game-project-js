@@ -30,4 +30,19 @@ const keydownHandler = (event) => {
 document.addEventListener('keydown', keydownHandler);
 
 // We call the gameLoop method to start the game
-gameEngine.gameLoop();
+let boxStartGame = () => {
+  let boxStart = document.querySelector('.box-message');
+      boxStart.style.visibility = 'visible';
+  let message = document.querySelector('h3');
+      message.innerText = "Are you ready?"
+
+  let btnStart = document.querySelector('#restart');
+      btnStart.addEventListener('click', () => {
+        gameEngine.gameLoop()
+        // remove box
+        boxStart.style.visibility = 'hidden';
+      });
+};
+
+boxStartGame();
+

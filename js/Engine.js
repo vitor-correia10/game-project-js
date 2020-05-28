@@ -18,12 +18,15 @@ class Engine {
     this.points = 0;
     this.score = document.querySelector('#score');
 
+    //Sound
     this.sound = document.createElement('audio');
     this.sound.src = './sound/bensound-brazilsamba.mp3';
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
+    this.sound.volume = 0.1;
 
+    //Waiting few seconds after lost a live
     this.waiting = false;
     
     // We add the background image to the game
@@ -34,6 +37,7 @@ class Engine {
   //  - Updates the enemy positions
   //  - Detects a collision between the player and any enemy
   //  - Removes enemies that are too low from the enemies array
+
   gameLoop = () => {
     // This code is to see how much time, in milliseconds, has elapsed since the last
     // time this method was called.
@@ -77,7 +81,6 @@ class Engine {
         this.enemies.push(new Enemy(this.root, spot));
         this.points += 10;
         this.score.innerText = `Score: ${this.points}`;
-        this.sound.play();
         }
     } else {
       while (this.enemies.length < (MAX_ENEMIES)) {
@@ -87,22 +90,24 @@ class Engine {
         this.enemies.push(new Enemy(this.root, spot));
         this.points += 10;
         this.score.innerText = `Score: ${this.points}`;
-        this.sound.play();
         }
     }
-
 
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
     if (this.isPlayerDead()) {
           this.message = document.querySelector('#message');
           this.message.innerText = score.innerText;
+
+          this.restartMessage = document.querySelector('h3');
+          this.restartMessage.innerText = "Game Over!"
           
           this.boxMessage = document.querySelector('.box-message');
           this.boxMessage.style.visibility = 'visible';
 
           this.restart = document.querySelector('#restart');
           this.restart.addEventListener('click', location.reload.bind(location));
+
           this.sound.pause();
       return;
     }
@@ -130,7 +135,7 @@ class Engine {
 
         this.waiting = true;
         setTimeout(() => this.waiting = false, 600);
-      } else if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y) {
+      } else if (enemy.x === this.player.x && (enemy.y + 100) >= this.player.y && (enemy.y) <= this.player.y) {
         isDead = true;
       }
     });
