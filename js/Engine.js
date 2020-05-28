@@ -52,7 +52,7 @@ class Engine {
     // We use the number of milliseconds since the last call to gameLoop to update the enemy positions.
     // Furthermore, if any enemy is below the bottom of our game, its destroyed property will be set. (See Enemy.js)
     this.enemies.forEach((enemy) => {
-      enemy.update(timeDiff, this.points / 1000);
+      enemy.update(timeDiff, this.points / 600);
     });
 
     // We remove all the destroyed enemies from the array referred to by \`this.enemies\`.
@@ -73,7 +73,7 @@ class Engine {
       this.score.innerText = `Score: ${this.points}`;
       this.sound.play();
       }
-    } else if (this.points >= 100 && this.points < 500){ 
+    } else if (this.points >= 100 && this.points < 300){ 
       while (this.enemies.length < (MAX_ENEMIES - 1)) {
         // We find the next available spot and, using this spot, we create an enemy.
         // We add this enemy to the enemies array
